@@ -1,0 +1,10 @@
+cam_subproject_deps = \
+	spike_main \
+	riscv \
+
+cam_hdrs = \
+        cam.h\
+
+cam_srcs = \
+	cam.cc \
+
