@@ -1,6 +1,7 @@
 #ifndef _RISCV_CAM_H
 #define _RISCV_CAM_H
 
+#include <iostream>
 #include <vector>
 #include "extension.h"
 
@@ -15,6 +16,7 @@ public:
         if (xs1 + xi >= scratchpad.size()) {
             scratchpad.resize(xs1 + xi);
         }
+        std::cout << "scratchpad[" << (xs1 + xi) << "] = " << scratchpad[xs1+xi] << std::endl;
         return scratchpad[xs1 + xi];
     }
 
@@ -22,6 +24,7 @@ public:
         if (xs2 + xi >= scratchpad.size()) {
             scratchpad.resize(xs2 + xi);
         }
+        std::cout << "scratchpad[" << (xs2 + xi) << "] <= " << xs1 << std::endl;
         scratchpad[xs2 + xi] = xs1;
     }
 
