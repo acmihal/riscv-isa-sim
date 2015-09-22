@@ -14,18 +14,18 @@ public:
 
     reg_t caml(reg_t xs1, int xi) {
         if (xs1 + xi >= scratchpad.size()) {
-            scratchpad.resize(xs1 + xi);
+            scratchpad.resize(xs1 + xi + 1);
         }
-        std::cout << "scratchpad[" << (xs1 + xi) << "] = " << scratchpad[xs1+xi] << std::endl;
+        std::cout << "caml scratchpad[" << (xs1 + xi) << "] => " << scratchpad[xs1+xi] << std::endl;
         return scratchpad[xs1 + xi];
     }
 
     void cams(reg_t xs1, reg_t xs2, reg_t xi) {
-        if (xs2 + xi >= scratchpad.size()) {
-            scratchpad.resize(xs2 + xi);
+        if (xs1 + xi >= scratchpad.size()) {
+            scratchpad.resize(xs1 + xi + 1);
         }
-        std::cout << "scratchpad[" << (xs2 + xi) << "] <= " << xs1 << std::endl;
-        scratchpad[xs2 + xi] = xs1;
+        std::cout << "cams scratchpad[" << (xs1 + xi) << "] <= " << xs2 << std::endl;
+        scratchpad[xs1 + xi] = xs2;
     }
 
     void camx() {
