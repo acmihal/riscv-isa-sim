@@ -18,6 +18,36 @@ class arg_t
   virtual ~arg_t() {}
 };
 
+struct load_address_t : public arg_t {
+  std::string to_string(insn_t insn) const {
+    return std::to_string((int)insn.i_imm()) + '(' + xpr_name[insn.rs1()] + ')';
+  }
+};
+
+struct store_address_t : public arg_t {
+  std::string to_string(insn_t insn) const {
+    return std::to_string((int)insn.s_imm()) + '(' + xpr_name[insn.rs1()] + ')';
+  }
+};
+
+struct xrd_t : public arg_t {
+  std::string to_string(insn_t insn) const {
+    return xpr_name[insn.rd()];
+  }
+};
+
+struct xrs1_t : public arg_t {
+  std::string to_string(insn_t insn) const {
+    return xpr_name[insn.rs1()];
+  }
+};
+
+struct xrs2_t : public arg_t {
+  std::string to_string(insn_t insn) const {
+    return xpr_name[insn.rs2()];
+  }
+};
+
 class disasm_insn_t
 {
  public:

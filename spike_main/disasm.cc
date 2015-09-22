@@ -8,41 +8,17 @@
 #include <stdlib.h>
 
 
-struct : public arg_t {
-  std::string to_string(insn_t insn) const {
-    return std::to_string((int)insn.i_imm()) + '(' + xpr_name[insn.rs1()] + ')';
-  }
-} load_address;
-
-struct : public arg_t {
-  std::string to_string(insn_t insn) const {
-    return std::to_string((int)insn.s_imm()) + '(' + xpr_name[insn.rs1()] + ')';
-  }
-} store_address;
+load_address_t load_address;
+store_address_t store_address;
+xrd_t xrd;
+xrs1_t xrs1;
+xrs2_t xrs2;
 
 struct : public arg_t {
   std::string to_string(insn_t insn) const {
     return std::string("0(") + xpr_name[insn.rs1()] + ')';
   }
 } amo_address;
-
-struct : public arg_t {
-  std::string to_string(insn_t insn) const {
-    return xpr_name[insn.rd()];
-  }
-} xrd;
-
-struct : public arg_t {
-  std::string to_string(insn_t insn) const {
-    return xpr_name[insn.rs1()];
-  }
-} xrs1;
-
-struct : public arg_t {
-  std::string to_string(insn_t insn) const {
-    return xpr_name[insn.rs2()];
-  }
-} xrs2;
 
 struct : public arg_t {
   std::string to_string(insn_t insn) const {
