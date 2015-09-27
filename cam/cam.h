@@ -120,7 +120,7 @@ public:
     }
   }
 
-  void camx() {
+  void cam_illegal_instruction() {
     illegal_instruction();
   }
 

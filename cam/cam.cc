@@ -12,6 +12,7 @@ static reg_t cam0(processor_t* p, insn_t insn, reg_t pc)
   switch (insn.rm()) {
     case 0: /* CAMSK0 */
       ext->camsk0(xs1, xs2, xis);
+      //xcam::opcodes::camsk0_sw(id, xs1, xis, xs2);
       break;
     case 1: /* CAMSK1 */
       ext->camsk1(xs1, xs2, xis);
@@ -32,7 +33,7 @@ static reg_t cam0(processor_t* p, insn_t insn, reg_t pc)
       WRITE_RD(ext->cam(xs1, xs2, f7));
       break;
     default:
-      ext->camx();
+      ext->cam_illegal_instruction();
   }
 
   return pc + 4;
