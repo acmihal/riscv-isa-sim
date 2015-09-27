@@ -1,8 +1,9 @@
 #include "cam.h"
+#include <riscv-xcam/xcam.h>
 
 static reg_t cam0(processor_t* p, insn_t insn, reg_t pc)
 {
-  cam_t* const ext = static_cast<cam_t*>(p->get_extension());
+  const int id = p->get_id();
   const reg_t xs1 = RS1;
   const reg_t xs2 = RS2;
   const int64_t xii = insn.i_imm();
@@ -11,29 +12,30 @@ static reg_t cam0(processor_t* p, insn_t insn, reg_t pc)
 
   switch (insn.rm()) {
     case 0: /* CAMSK0 */
-      ext->camsk0(xs1, xs2, xis);
-      //xcam::opcodes::camsk0_sw(id, xs1, xis, xs2);
+      xcam::opcodes::camsk0_sw(id, xs1, xis, xs2);
       break;
     case 1: /* CAMSK1 */
-      ext->camsk1(xs1, xs2, xis);
+      xcam::opcodes::camsk1_sw(id, xs1, xis, xs2);
       break;
     case 2: /* CAMSV */
-      ext->camsv(xs1, xs2, xis);
+      xcam::opcodes::camsv_sw(id, xs1, xis, xs2);
       break;
     case 3: /* CAMLK0 */
-      WRITE_RD(ext->camlk0(xs1, xii));
+      WRITE_RD(xcam::opcodes::camlk0_sw(id, xs1, xii));
       break;
     case 4: /* CAMLK1 */
-      WRITE_RD(ext->camlk1(xs1, xii));
+      WRITE_RD(xcam::opcodes::camlk1_sw(id, xs1, xii));
       break;
     case 5: /* CAMLV */
-      WRITE_RD(ext->camlv(xs1, xii));
+      WRITE_RD(xcam::opcodes::camlv_sw(id, xs1, xii));
       break;
     case 6: /* CAM */
-      WRITE_RD(ext->cam(xs1, xs2, f7));
+      WRITE_RD(xcam::opcodes::cam_sw(id, xs1, xs2, f7));
       break;
     default:
+      cam_t* const ext = static_cast<cam_t*>(p->get_extension());
       ext->cam_illegal_instruction();
+      break;
   }
 
   return pc + 4;

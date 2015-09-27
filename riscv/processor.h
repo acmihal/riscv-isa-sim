@@ -92,6 +92,7 @@ public:
   bool supports_extension(unsigned char ext) {
     return ext >= 'A' && ext <= 'Z' && ((cpuid >> (ext - 'A')) & 1);
   }
+  uint32_t get_id(void) const { return id; }
   void push_privilege_stack();
   void pop_privilege_stack();
   void yield_load_reservation() { state.load_reservation = (reg_t)-1; }
